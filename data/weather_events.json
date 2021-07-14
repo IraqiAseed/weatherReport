@@ -1,0 +1,87 @@
+[
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "Rain",
+    "value": 0.0
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "WSmax",
+    "value": 7.8
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "WDmax",
+    "value": 269.0
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "WS",
+    "value": 5.5
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "WD",
+    "value": 278.0
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "STDwd",
+    "value": 15.8
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "TD",
+    "value": 33.5
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "RH",
+    "value": 37.0
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "TDmax": 38,
+    "channel": "TDmax",
+    "value": 38
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "TDmin",
+    "value": 33.4
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "TG",
+    "value": 38.8
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "WS1mm",
+    "value": 6.3
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "Ws10mm",
+    "value": 5.5
+  },
+  {
+    "stationId": 2,
+    "datetime": "2021-06-29T16:10:00+03:00",
+    "channel": "Time",
+    "value": 1605.0
+  }
+]
