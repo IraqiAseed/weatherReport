@@ -4,6 +4,16 @@ import org.apache.spark.sql.{Dataset, Row}
 
 trait Statistics {
 
+  def StandardDeviation(name: String,lastName:String):Dataset[String]
+
+
+
+
+
+
+
+
+
   def countFarms: Int
 
   def relevantEvents: Dataset[Row] //farm stationId == event stationId

@@ -13,7 +13,8 @@ class EventRepository(sparkSession: SparkSession, @Value("${events_file_path}") 
   def readEvents(): Dataset[Row] = {
 
     val schema = spark.sql.Encoders.product[Event].schema
-    sparkSession.read.option("multiline", "true").schema(schema).json( path)
+    sparkSession.read.schema(schema).json(path)
+      //removed .option("multiline", "true") - they return a single line json !!
 
   }
 

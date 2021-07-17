@@ -3,7 +3,21 @@
     "id": 12,
     "name": "Aseed",
     "lastName": "Iraqi",
-    "stationId": 3,
+    "stationId": 8,
+    "location": "Sharon",
+    "crops": "mango",
+    "sensitivity": {
+      "heat": 3,
+      "cold": 4,
+      "dry": 1
+    },
+    "email": "iraqiaseed@gmail.com"
+  },
+  {
+    "id": 15,
+    "name": "Aseed",
+    "lastName": "Iraqi",
+    "stationId": 9,
     "location": "Sharon",
     "crops": "mango",
     "sensitivity": {

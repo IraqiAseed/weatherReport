@@ -4,6 +4,12 @@ import org.apache.spark.sql.{Dataset, Row}
 
 trait SpecificData {
 
+
+
+
+
+
+
   def getEventsBetweenMinMaxTemp: Dataset[Row]
 
   def getEventsAtTimeDayBetweenMinMaxTemp: Dataset[Row]

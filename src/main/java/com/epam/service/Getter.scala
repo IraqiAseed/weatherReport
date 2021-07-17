@@ -17,6 +17,7 @@ class Getter(eventRepository: EventRepository, farmRepository: FarmRepository) e
 
     val farms = farmRepository.readEvents()
     farms.show()
+    print(farms.schema)
     farms
 
   }
