@@ -4,7 +4,6 @@ import com.epam.model.Event
 import org.apache.spark
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.PropertySource
 import org.springframework.stereotype.Component
 
 @Component
