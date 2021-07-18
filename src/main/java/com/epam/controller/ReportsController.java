@@ -1,13 +1,10 @@
 package com.epam.controller;
 
 
-import com.epam.repository.EventRepository;
-import com.epam.repository.FarmRepository;
 import com.epam.service.Implementation.JumpsImp;
 import com.epam.service.Implementation.SequencesImpl;
 import com.epam.service.Implementation.StatisticsImpl;
 import com.epam.service.Implementation.TopTenImpl;
-import com.epam.service.Interface.Sequences;
 import org.apache.spark.sql.Dataset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +20,6 @@ import java.util.List;
 public class ReportsController {
 
     @Autowired
-    private FarmRepository farmRepo;
-
-    @Autowired
-    private EventRepository eventRepo;
-
-    @Autowired
     private TopTenImpl topTen;
 
     @Autowired
@@ -40,63 +31,60 @@ public class ReportsController {
     @Autowired
     private SequencesImpl seq;
 
-    @GetMapping("farmTopTenTemp")   //todo fix the object .. !! //todo saving to json file
-    public List<Object> getTopTen(@RequestParam Integer farmId) {
+    @GetMapping("farmTopTenTemp")   //todo saving to json file
+    public List<Double> getTopTen(@RequestParam Integer farmId) {
 
         return topTen.topTenPerFarm(farmId);
     }
-    @GetMapping("userTopTenTemp")
-    public String  topTen(@RequestParam String name, @RequestParam String lastName) {
 
-        Dataset<String> DsStr =  topTen.topTenPerUser(name,lastName);
-        return DsStr.collectAsList().toString();
+    @GetMapping("userTopTenTemp")
+    public List<String> topTen(@RequestParam String name, @RequestParam String lastName) {
+
+        Dataset<String> DsStr = topTen.topTenPerUser(name, lastName);
+        return DsStr.collectAsList();
 
     }
 
-    @GetMapping("deviation") //todo - currentt is checking for temprature
-    public String  getStandardDeviation(@RequestParam String name, @RequestParam String lastName) {
+    @GetMapping("deviation")
+    public List<String> getStandardDeviation(@RequestParam String name, @RequestParam String lastName) {
 
-        Dataset<String> DsStr = statistics.standardDeviation(name,lastName);
-        return DsStr.collectAsList().toString();
+        Dataset<String> DsStr = statistics.standardDeviation(name, lastName);
+        return DsStr.collectAsList();
 
     }
 
     @GetMapping("jumps")
-    public String  getConsecutiveEventsWithTemperatureJump(@RequestParam String name, @RequestParam String lastName,
-                                                           @RequestParam Integer jump) {
+    public List<String> getConsecutiveEventsWithTemperatureJump(@RequestParam String name, @RequestParam String lastName,
+                                                                @RequestParam Integer jump) {
 
-        Dataset<String> DsStr = jumps.getConsecutiveEventsWithTemperatureJump(name,lastName,jump);
-        return DsStr.collectAsList().toString();
+        Dataset<String> DsStr = jumps.getConsecutiveEventsWithTemperatureJump(name, lastName, jump);
+        return DsStr.collectAsList();
 
     }
 
     @GetMapping("hasAscSeqThenDesc")
-    public boolean  checkIfHasDecreasingSequenceFollowedByAscendingSequences(@RequestParam String name, @RequestParam String lastName) {
+    public boolean checkIfHasDecreasingSequenceFollowedByAscendingSequences(@RequestParam String name, @RequestParam String lastName) {
 
-        return  seq.checkIfHasDecreasingSequenceFollowedByAscendingSequences(name,lastName);
+        return seq.checkIfHasDecreasingSequenceFollowedByAscendingSequences(name, lastName);
         //return DsStr.collectAsList().toString();
 
     }
 
     @GetMapping("getAscSeqThenDesc")
-    public String  getFirstEventDecreasingSequenceFollowedByAscendingSequences(@RequestParam String name, @RequestParam String lastName) {
+    public List<String> getFirstEventDecreasingSequenceFollowedByAscendingSequences(@RequestParam String name, @RequestParam String lastName) {
 
-        Dataset<String> DsStr =  seq.getFirstEventsDecreasingSequenceFollowedByAscendingSequences(name,lastName);
-        return DsStr.collectAsList().toString();
+        Dataset<String> DsStr = seq.getFirstEventsDecreasingSequenceFollowedByAscendingSequences(name, lastName);
+        return DsStr.collectAsList();
 
     }
+
     @GetMapping("avg")
-    public String  getAverages(@RequestParam String name, @RequestParam String lastName) {
+    public List<String> getAverages(@RequestParam String name, @RequestParam String lastName) {
 
-        Dataset<String> DsStr =  statistics.average(name,lastName);
-        return DsStr.collectAsList().toString();
+        Dataset<String> DsStr = statistics.average(name, lastName);
+        return DsStr.collectAsList();
 
     }
-
-
-
-
-
 
 
 }

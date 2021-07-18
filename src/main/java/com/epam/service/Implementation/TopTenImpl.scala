@@ -15,7 +15,7 @@ import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
 class TopTenImpl(eventRepository: EventRepository, farmRepository: FarmRepository) extends TopTen {
 
 
-  override def topTenPerFarm(farmId: Int): java.util.List[Double] = {
+  override def topTenPerFarm(farmId: Int): java.util.List[java.lang.Double] = {
     val events = eventRepository.readEvents().persist(StorageLevel.MEMORY_AND_DISK)
     val farms = farmRepository.readEvents().persist(StorageLevel.MEMORY_AND_DISK)
 
@@ -41,7 +41,7 @@ class TopTenImpl(eventRepository: EventRepository, farmRepository: FarmRepositor
 
     print(topX)
 
-    val top = topX.asJava
+    val top = topX.map(Double.box).asJava
 
     top
   }
