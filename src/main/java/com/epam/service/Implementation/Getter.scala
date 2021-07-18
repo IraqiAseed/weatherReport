@@ -1,6 +1,7 @@
-package com.epam.service
+package com.epam.service.Implementation
 
 import com.epam.repository.{EventRepository, FarmRepository}
+import com.epam.service.Interface.BasicData
 import org.apache.spark.sql.{Dataset, Row}
 import org.springframework.stereotype.Component
 

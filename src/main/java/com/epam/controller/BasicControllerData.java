@@ -1,6 +1,6 @@
 package com.epam.controller;
 
-import com.epam.service.Getter;
+import com.epam.service.Implementation.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

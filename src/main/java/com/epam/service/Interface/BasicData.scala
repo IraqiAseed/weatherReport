@@ -1,4 +1,4 @@
-package com.epam.service
+package com.epam.service.Interface
 
 import org.apache.spark.sql.{Dataset, Row}
 

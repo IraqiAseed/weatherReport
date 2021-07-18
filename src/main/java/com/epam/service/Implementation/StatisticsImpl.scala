@@ -1,7 +1,8 @@
-package com.epam.service
+package com.epam.service.Implementation
 
 import com.epam.repository.{EventRepository, FarmRepository}
-import org.apache.spark.sql.functions.{aggregate, avg, col, count, sqrt, sum}
+import com.epam.service.Interface.Statistics
+import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{Dataset, Row}
 import org.apache.spark.storage.StorageLevel
 import org.springframework.stereotype.Component
@@ -12,9 +13,9 @@ import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
 @Component
 class StatisticsImpl(eventRepository: EventRepository, farmRepository: FarmRepository) extends Statistics {
 
-  override def StandardDeviation(name: String, lastName: String):  Dataset[String] = {
-    val events = eventRepository.readEvents()
-    val farms = farmRepository.readEvents()
+  override def standardDeviation(name: String, lastName: String): Dataset[String] = {
+    val events = eventRepository.readEvents().persist(StorageLevel.MEMORY_AND_DISK)
+    val farms = farmRepository.readEvents().persist(StorageLevel.MEMORY_AND_DISK)
 
     val stations: List[Int] = farms
       .filter(col("name").equalTo(name))
@@ -40,7 +41,7 @@ class StatisticsImpl(eventRepository: EventRepository, farmRepository: FarmRepos
       .agg(avg("value").alias("average"))
       .persist(StorageLevel.MEMORY_AND_DISK)
 
-    val eventsWithAvg = eventsForDeviation.join(averageDF,"stationId")
+    val eventsWithAvg = eventsForDeviation.join(averageDF, "stationId")
       .persist(StorageLevel.MEMORY_AND_DISK)
 
 
@@ -53,30 +54,45 @@ class StatisticsImpl(eventRepository: EventRepository, farmRepository: FarmRepos
         sum("squaredDistance").alias("sum"),
         count("stationId").alias("count")
       )
-      .withColumn("deviation",sqrt(col("sum").divide(col("count"))))
-      .drop("sum","count")
+      .withColumn("deviation", sqrt(col("sum").divide(col("count"))))
+      .drop("sum", "count")
       .persist(StorageLevel.MEMORY_AND_DISK)
 
 
     eventDeviation.show()
+
+
 
     eventDeviation.toJSON
 
 
   }
 
+  override def average(name: String, lastName: String): Dataset[String] = {
+    val events = eventRepository.readEvents().persist(StorageLevel.MEMORY_AND_DISK)
+    val farms = farmRepository.readEvents().persist(StorageLevel.MEMORY_AND_DISK)
 
-  override def countFarms: Int = ???
+    val stations: List[Int] = farms
+      .filter(col("name").equalTo(name))
+      .filter(col("lastName").equalTo(lastName))
+      .select(col("stationId"))
+      .distinct()
+      .collectAsList()
+      .map(row => row.getInt(0))
+      .toList
 
-  override def relevantEvents: Dataset[Row] = ???
+    println(stations)
 
-  override def rainAverage(id: Int): Double = ???
 
-  override def rainInFarmInSpecificPeriod(id: Int): Double = ???
+    val eventsAvg: Dataset[Row] = events
+      .filter(col("stationId").isInCollection(stations))
+      .groupBy("stationId","channel")
+      .agg(avg("value"))
+      .sort("stationId")
 
-  override def rainInFarmsInSpecificPeriod(): Dataset[Row] = ???
+    eventsAvg.show()
 
-  override def maxMinTempFarm(id: Int): Double = ???
+    eventsAvg.toJSON
 
-  override def maxMinTempAllFarms(id: Int): Double = ???
+  }
 }
