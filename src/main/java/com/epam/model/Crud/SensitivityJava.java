@@ -1,4 +1,4 @@
-package com.epam.model;
+package com.epam.model.Crud;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

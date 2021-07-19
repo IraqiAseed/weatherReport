@@ -1,8 +1,8 @@
 package com.epam;
 
-import com.epam.model.FarmJava;
-import com.epam.model.SensitivityJava;
-import com.epam.service.Implementation.FarmJavaService;
+import com.epam.model.Crud.FarmJava;
+import com.epam.model.Crud.SensitivityJava;
+import com.epam.service.Implementation.Crud.FarmJavaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

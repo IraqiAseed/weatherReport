@@ -1,9 +1,9 @@
-package com.epam.controller;
+package com.epam.controller.Crud;
 
 
 
-import com.epam.model.FarmJava;
-import com.epam.service.Implementation.FarmJavaService;
+import com.epam.model.Crud.FarmJava;
+import com.epam.service.Implementation.Crud.FarmJavaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

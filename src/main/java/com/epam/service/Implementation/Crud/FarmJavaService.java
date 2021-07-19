@@ -1,7 +1,7 @@
-package com.epam.service.Implementation;
+package com.epam.service.Implementation.Crud;
 
-import com.epam.model.FarmJava;
-import com.epam.repository.FarmJavaRepository;
+import com.epam.model.Crud.FarmJava;
+import com.epam.repository.Crud.FarmJavaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

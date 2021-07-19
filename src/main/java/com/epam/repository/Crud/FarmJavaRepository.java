@@ -1,6 +1,6 @@
-package com.epam.repository;
+package com.epam.repository.Crud;
 
-import com.epam.model.FarmJava;
+import com.epam.model.Crud.FarmJava;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

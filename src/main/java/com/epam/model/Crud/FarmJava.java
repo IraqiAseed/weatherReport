@@ -1,4 +1,4 @@
-package com.epam.model;
+package com.epam.model.Crud;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
