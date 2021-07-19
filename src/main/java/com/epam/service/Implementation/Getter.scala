@@ -6,13 +6,20 @@ import org.apache.spark.sql.{Dataset, Row}
 import org.springframework.stereotype.Component
 
 @Component
-class Getter(eventRepository: EventRepository, farmRepository: FarmRepository) extends BasicData {
+class Getter(eventRepository: EventRepository, farmRepository: FarmRepository,farmMongDB:FarmJavaService) extends BasicData {
 
   override def getAllEvents: Dataset[Row] = {
     val events = eventRepository.readEvents()
     events.show()
+
+    farmRepository.writeSparkDbFarm()
+    farmRepository.readSparkDbFarm()
     events
   }
+
+ // def getAllDBFarms:Dataset[Row] ={
+    //farmMongDB.getAllFarms.
+  //}
 
   override def getAllFarmsData: Dataset[Row] = {
 

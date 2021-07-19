@@ -8,6 +8,8 @@ class ConfiguratorForSpringBoot {
 
   @Bean
   def sparkSessionDev: SparkSession = SparkSession.builder.master("local[*]").appName("Weather-agro Project")
+    .config("spark.mongodb.input.uri", "mongodb://127.0.0.1/test.characters")
+    .config("spark.mongodb.output.uri", "mongodb://127.0.0.1/test.characters")
     .getOrCreate
 
 

@@ -1,6 +1,6 @@
 package com.epam.service.Implementation
 
-import com.epam.repository.{EventRepository, FarmRepository}
+import com.epam.repository.{EventRepository, FarmJavaRepository, FarmRepository}
 import com.epam.service.Interface.Jumps
 import org.apache.spark.sql.expressions.Window
 import org.apache.spark.sql.functions._
