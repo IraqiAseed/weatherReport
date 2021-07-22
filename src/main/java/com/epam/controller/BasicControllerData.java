@@ -1,6 +1,6 @@
 package com.epam.controller;
 
-import com.epam.service.Implementation.Getter;
+import com.epam.service.Implementation.BasicDataGetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BasicControllerData {
 
     @Autowired
-    private Getter getterService;
+    private BasicDataGetter getterService;
 
     @GetMapping("farms")
     public void getFarms() {

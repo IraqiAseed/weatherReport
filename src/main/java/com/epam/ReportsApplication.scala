@@ -2,7 +2,7 @@ package com.epam
 
 import com.epam.repository.FarmRepository
 import com.epam.service.Implementation.Crud.FarmJavaService
-import com.epam.service.InitFarmService
+import com.epam.service.InitService.InitFarmService
 import org.springframework.boot.{CommandLineRunner, SpringApplication}
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.ConfigurableApplicationContext

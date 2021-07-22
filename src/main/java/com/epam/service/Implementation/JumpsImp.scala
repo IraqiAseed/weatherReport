@@ -2,16 +2,17 @@ package com.epam.service.Implementation
 
 import com.epam.repository.{EventRepository, FarmRepository}
 import com.epam.service.Interface.Jumps
+import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.expressions.Window
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.{Dataset, Row, SaveMode}
+import org.apache.spark.sql.{Dataset, Row, SaveMode, SparkSession}
 import org.apache.spark.storage.StorageLevel
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
 class JumpsImp(eventRepository: EventRepository, farmRepository: FarmRepository,
-               @Value("${jumps_file_path}") jumpsOutPath:String) extends Jumps {
+               @Value("${jumps_file_path}") jumpsOutPath:String,spark: SparkSession) extends Jumps {
 
   override def getConsecutiveEventsWithTemperatureJump(name: String, lastName: String, jump: Int): Dataset[String] = {
     val events = eventRepository.readEvents().persist(StorageLevel.MEMORY_AND_DISK)
@@ -40,8 +41,12 @@ class JumpsImp(eventRepository: EventRepository, farmRepository: FarmRepository,
     eventsWithJump.show()
 
 
-    var eventsAllDataThatJumps = events.join(eventsWithJump,"stationId")
+    var eventsAllDataThatJumps = events.join(broadcast(eventsWithJump),"stationId")
       .persist(StorageLevel.MEMORY_AND_DISK)
+
+
+  //    var eventsAllDataThatJumps = events.join(eventsWithJump,"stationId")
+  //    .persist(StorageLevel.MEMORY_AND_DISK)
 
     eventsAllDataThatJumps = eventsAllDataThatJumps
       .filter(col("datetime").equalTo( col("datetime2"))
