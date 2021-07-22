@@ -1,7 +1,7 @@
 package com.epam.controller;
 
 
-import com.epam.service.Implementation.JumpsImp;
+import com.epam.service.Implementation.JumpsImpl;
 import com.epam.service.Implementation.SequencesImpl;
 import com.epam.service.Implementation.StatisticsImpl;
 import com.epam.service.Implementation.TopTenImpl;
@@ -26,7 +26,7 @@ public class ReportsController {
     private StatisticsImpl statistics;
 
     @Autowired
-    private JumpsImp jumps;
+    private JumpsImpl jumps;
 
     @Autowired
     private SequencesImpl seq;
