@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/basic/")
 public class BasicControllerData {
 
-    //todo : saving results to json files
-
     @Autowired
     private Getter getterService;
 

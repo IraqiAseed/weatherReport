@@ -1,6 +1,7 @@
 package com.epam.service.Interface
 
 import org.apache.spark.sql.Dataset
+import org.springframework.beans.factory.annotation.Value
 
 trait TopTen {
 

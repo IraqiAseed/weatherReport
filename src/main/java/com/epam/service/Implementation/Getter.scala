@@ -13,18 +13,14 @@ class Getter(eventRepository: EventRepository, farmRepository: FarmRepository,fa
     val events = eventRepository.readEvents()
     events.show()
 
-    farmRepository.writeSparkDbFarm()
-    farmRepository.readSparkDbFarm()
     events
   }
 
- // def getAllDBFarms:Dataset[Row] ={
-    //farmMongDB.getAllFarms.
-  //}
+
 
   override def getAllFarmsData: Dataset[Row] = {
 
-    val farms = farmRepository.readEvents()
+    val farms = farmRepository.readFarmsDataFromMongoDb()
     farms.show()
     print(farms.schema)
     farms
@@ -32,13 +28,13 @@ class Getter(eventRepository: EventRepository, farmRepository: FarmRepository,fa
   }
 
   override def getCrops: Dataset[Row] = {
-    val crops = farmRepository.readEvents().select("crops").distinct()
+    val crops = farmRepository.readFarmsDataFromMongoDb().select("crops").distinct()
     crops.show()
     crops
   }
 
   override def getUsersData: Dataset[Row] = {
-    val users = farmRepository.readEvents().select("name", "lastName", "email")
+    val users = farmRepository.readFarmsDataFromMongoDb().select("name", "lastName", "email")
     users.show()
     users
   }
@@ -50,13 +46,13 @@ class Getter(eventRepository: EventRepository, farmRepository: FarmRepository,fa
   }
 
   override def getFarmsStations: Dataset[Row] = {
-    val stations = farmRepository.readEvents().select("stationId").distinct()
+    val stations = farmRepository.readFarmsDataFromMongoDb().select("stationId").distinct()
     stations.show()
     stations
   }
 
   override def getFarmsLocations: Dataset[Row] = {
-    val locations = farmRepository.readEvents().select("location").distinct()
+    val locations = farmRepository.readFarmsDataFromMongoDb().select("location").distinct()
     locations.show()
     locations
   }
